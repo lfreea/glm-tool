@@ -1,0 +1,22 @@
+# Ignore git
+.git
+.gitignore
+
+# Ignore IDE
+.idea
+.vscode
+*.swp
+*.swo
+
+# Ignore build artifacts
+*.exe
+glm-tool-*
+
+# Ignore env files
+.env
+*.log
+
+# Ignore docs
+README.md
+LICENSE
+docs/

@@ -9,12 +9,14 @@ import (
 )
 
 type Config struct {
-	Port         string
-	TargetAPIURL string
+	Port            string
+	TargetAPIURL    string
 	AnthropicAPIURL string
-	LogLevel     string
-	Debug        bool
-	DebugLogFile string
+	LogLevel        string
+	Debug           bool
+	DebugLogFile    string
+	CachePath       string
+	CacheTTLHours   int
 }
 
 var AppConfig *Config
@@ -26,12 +28,14 @@ func LoadConfig() {
 	}
 
 	AppConfig = &Config{
-		Port:         getEnv("PORT", "8080"),
-		TargetAPIURL: getEnv("TARGET_API_URL", "https://open.bigmodel.cn/api/coding/paas/v4"),
+		Port:            getEnv("PORT", "8080"),
+		TargetAPIURL:    getEnv("TARGET_API_URL", "https://open.bigmodel.cn/api/coding/paas/v4"),
 		AnthropicAPIURL: getEnv("ANTHROPIC_API_URL", "https://open.bigmodel.cn/api/anthropic"),
-		LogLevel:     getEnv("LOG_LEVEL", "info"),
-		Debug:        getBoolEnv("DEBUG", false),
-		DebugLogFile: getEnv("DEBUG_LOG_FILE", "debug.json"),
+		LogLevel:        getEnv("LOG_LEVEL", "info"),
+		Debug:           getBoolEnv("DEBUG", false),
+		DebugLogFile:    getEnv("DEBUG_LOG_FILE", "debug.json"),
+		CachePath:       getEnv("CACHE_PATH", "image_cache.db"),
+		CacheTTLHours:   getIntEnv("CACHE_TTL_HOURS", 24),
 	}
 
 	// 设置日志级别
@@ -52,6 +56,15 @@ func getBoolEnv(key string, defaultValue bool) bool {
 	if value := os.Getenv(key); value != "" {
 		if b, err := strconv.ParseBool(value); err == nil {
 			return b
+		}
+	}
+	return defaultValue
+}
+
+func getIntEnv(key string, defaultValue int) int {
+	if value := os.Getenv(key); value != "" {
+		if i, err := strconv.Atoi(value); err == nil {
+			return i
 		}
 	}
 	return defaultValue
