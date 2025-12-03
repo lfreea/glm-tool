@@ -57,10 +57,13 @@ cp .env.example .env
 docker run -d \
   --name glm-tool \
   -p 8080:8080 \
+  -v ./data:/data \
   -e PORT=8080 \
   -e TARGET_API_URL=https://open.bigmodel.cn/api/coding/paas/v4 \
   ghcr.io/lfreea/glm-tool:latest
 ```
+
+Mount `/data` to persist the image recognition cache.
 
 ### Option 3: Docker Compose
 
@@ -72,6 +75,8 @@ services:
     image: ghcr.io/lfreea/glm-tool:latest
     ports:
       - "8080:8080"
+    volumes:
+      - ./data:/data
     environment:
       - PORT=8080
       - TARGET_API_URL=https://open.bigmodel.cn/api/coding/paas/v4
