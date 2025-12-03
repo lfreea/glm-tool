@@ -1,0 +1,27 @@
+# 环境配置文件
+.env
+
+# 日志文件
+*.log
+
+# 编译输出
+/bin
+/dist
+glm-tool
+
+# 缓存文件
+debug.json
+image_cache.json
+image_cache.db
+
+# macOS
+.DS_Store
+
+# IDE
+.idea/
+.vscode/
+
+# 测试图片
+*.png
+*.jpg
+*.jpeg
