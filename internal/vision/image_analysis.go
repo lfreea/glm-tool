@@ -36,7 +36,7 @@ type VisionConfig struct {
 // DefaultVisionConfig 默认配置（完全按照 MCP 配置）
 var DefaultVisionConfig = VisionConfig{
 	BaseURL:     "https://open.bigmodel.cn/api/paas/v4",
-	Model:       "glm-4.5v", // MCP 默认使用 glm-4.5v
+	Model:       "glm-4.6v", // MCP 默认使用 glm-4.6v
 	Temperature: 0.8,
 	TopP:        0.6,
 	MaxTokens:   16384,
@@ -191,7 +191,7 @@ func AnalyzeImageWithConfig(request ImageAnalysisRequest, config VisionConfig) (
 	// 设置请求头（完全按照 MCP 的 chatCompletions）
 	httpReq.Header.Set("Content-Type", "application/json")
 	httpReq.Header.Set("Authorization", fmt.Sprintf("Bearer %s", request.APIKey))
-	httpReq.Header.Set("X-Title", "4.5V MCP Local") // 与 MCP 一致
+	httpReq.Header.Set("X-Title", "4.6V MCP Local")   // 与 MCP 一致
 	httpReq.Header.Set("Accept-Language", "en-US,en") // 与 MCP 一致
 
 	// 创建 HTTP 客户端
